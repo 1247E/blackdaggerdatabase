@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Facility Database</title>
+  <link rel="icon" type="image/x-icon" href="icon.png">
+  <style>
+    :root {
+      --bg-dark: #0e0e10;
+      --bg-panel: #1a1a1d;
+      --bg-accent: #23232b;
+      --text-light: #f0f0f0;
+      --text-accent: #6cb4ff;
+      --border-glow: #6cb4ff88;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom, var(--bg-dark), #1a1a1a);
+      color: var(--text-light);
+    }
+
+    header {
+      background: linear-gradient(to right, #121212, #1e1e1e);
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.8rem;
+      color: #fff;
+      text-shadow: 0 0 5px var(--border-glow);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      background-color: var(--bg-accent);
+      padding: 12px 0;
+      border-bottom: 1px solid #333;
+    }
+
+    nav a {
+      color: var(--text-accent);
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 100%;
+      height: 2px;
+      background: var(--text-accent);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    nav a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    .intro {
+      background: var(--bg-panel);
+      padding: 25px;
+      border-left: 4px solid var(--text-accent);
+      margin-bottom: 35px;
+      border-radius: 8px;
+      transition: all 0.25s ease;
+      box-shadow: 0 0 8px #00000088;
+    }
+
+    .intro:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 0 15px var(--border-glow);
+    }
+
+    .intro h2 {
+      margin-top: 0;
+      font-size: 1.8rem;
+      color: var(--text-accent);
+    }
+
+    .intro p {
+      line-height: 1.6;
+      font-size: 1.05rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      margin-top: 40px;
+      border-bottom: 2px solid var(--text-accent);
+      padding-bottom: 8px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      margin-top: 25px;
+    }
+
+    .card {
+      background: linear-gradient(to bottom, #1c1c1f, #222225);
+      border: 1px solid #2b2b2b;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      transition: all 0.25s ease;
+      box-shadow: 0 0 10px transparent;
+    }
+
+    .card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 0 15px var(--border-glow);
+    }
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+
+    .card h3 {
+      margin-top: 5px;
+      color: var(--text-accent);
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    a.read-more {
+      color: var(--text-accent);
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 10px;
+      transition: color 0.3s ease;
+    }
+
+    a.read-more:hover {
+      color: #9ecfff;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #aaa;
+      border-top: 1px solid #333;
+      margin-top: 50px;
+    }
+
+.account-widget {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  z-index: 10;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-panel);
+  padding: 8px 12px;
+  border: 1px solid var(--border-glow);
+  border-radius: 6px;
+  box-shadow: 0 0 10px #00000066;
+  transition: background 0.3s;
+  position: relative;
+  z-index: 2;
+}
+
+.user-info:hover {
+  background: var(--bg-accent);
+}
+
+.user-info img {
+  width: 20px;
+  height: 20px;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  display: none;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-glow);
+  border-radius: 6px;
+  padding: 10px 14px;
+  box-shadow: 0 0 15px #00000088;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin-top: 5px;
+  z-index: 1;
+  min-width: 200px;
+}
+
+.account-widget:hover .dropdown {
+  display: block;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  background: url('ica.png') repeat-y center;
+  background-size: cover;
+  opacity: 0.2; /* Adjust visibility */
+  z-index: -1;
+  pointer-events: none;
+  mask-image: linear-gradient(to right, black 0%, transparent 25%, transparent 75%, black 100%);
+}
+
+
+
+  </style>
+</head>
+<body>
+
+<header>
+<h1>Facility-03 "Black Dagger" Database</h1>
+<div class="account-widget">
+  <div class="user-info">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="User Icon">
+    <span>Local Account</span>
+  </div>
+  <div class="dropdown">
+    <p><strong>Clearance Level:</strong> 4</p>
+    <p><strong>Status:</strong> Logged in anonymously</p>
+    <p><strong>Session ID:</strong> #F03-47329</p>
+    <p><strong>Clearence Key:</strong> level4grandaccesskeynr102</p>
+  </div>
+</div>
+
+
+</header>
+
+<nav>
+  <a href="revamp_home.html">Home</a>
+  <a href="revamp_anomalies.html">Anomalies</a>
+  <a href="revamp_personnel.html">Personnel</a>
+  <a href="revamp_departments.html">Departments</a>
+  <a href="revamp_logs.html">Logs</a>
+  <a href="revamp_net.html">NAAD-Net</a>
+  <a href="revamp_other.html">Other</a>
+</nav>
+
+
+
+
+<div class="container">
+  <div class="intro">
+    <h2>Welcome to the OFFICIAL Facility-03 "Black Dagger" Database!</h2>
+    <h3>38 articles • 594 total edits • 55 files uploaded</h3>
+    <br> 
+    <p>This Database documents F-03 as a whole and all associated anomalies, lore and personnel.</p>
+    <p>This Database has been identified as requiring proof reading and confirmation that all the data is indeed correct.</p>
+  </div>
+
+  <h2 class="section-title">Navigation</h2>
+  <div class="card-grid">
+    <div class="card">
+      <a href="revamp_anomalies.html" target="_blank">
+        <img src="room.png" alt="AN" style="cursor: pointer">
+      </a>
+      <h3>AN Entries</h3>
+    </div>
+    <div class="card">
+      <a href="revamp_personnel.html" target="_blank">
+      <img src="wick.png" alt="Personnel">
+      </a>
+      <h3>Personnel Files</h3>
+    </div>
+    <div class="card">
+      <a href="revamp_net.html" target="_blank">
+      <img src="ica.png" alt="Departments">
+      </a>
+      <h3>Departments</h3>
+    </div>
+    <div class="card">
+      <a href="revamp_logs.html" target="_blank">
+      <img src="code.png" alt="Logs">
+      </a>
+      <h3>Incident Logs</h3>
+    </div>
+    <div class="card">
+      <a href="revamp_net.html" target="_blank">
+      <img src="office.png" alt="Net">
+      </a>
+      <h3>NAAD-Net</h3>
+    </div>
+
+  <h2 class="section-title">Featured Article</h2>
+  <div class="card">
+    <h3>AN-5673 - Grand Mechanix</h3>
+    <p>Grand Mechanix is a sentient entity that exists as the central consciousness and control system for a vast network of autonomously operating machines and drones...</p>
+    <a class="read-more" href="revamp_anomalies.html" target="_blank">Read More →</a>
+  </div>
+</div>
+
+<!-- Add inside the <body> tag, before the footer -->
+<div class="container">
+  <h2 class="section-title">Community</h2>
+
+
+  <div class="intro">
+    <h3>Recent News</h3>
+    <ul style="line-height: 1.7; padding-left: 20px;">
+      <li><strong>08-07-2025: </strong>Mother of All Updates<br><br><strong>Overall</strong><br>Added Facility Maps around the facility<br>Added Cameras<br>Split up the facility into 4 levels<br>Added RAZs (Restricted Access Zones)<br>Added stationary M60s (props) around the facility<br>Revamped SCED & SRRF Morphs<br>Added new department NIIS (NATO Intelligence & Internal Security)<br>Changed soundtrack to only facility ambience, no more music (except for events)<br><br><strong>Lobby</strong><br>OORP Area<br>Facility Map<br>RP Rules<br>Statues of devs and the ownership<br>Area for SSU/SSD Briefing<br>Discord invite link<br>Accessible through the "LOBBY" team in the team menu<strong>Containment Wing</strong><br>Checkpoint DELTA expanded<br>Hallways revamped<br>Added markers on the floor to show the directions<br>Added shelter CHARLIE<br>Revamped SRRF Armory and added zones for Test Subjects to receive guns (in the armory, touch a gun rack)<br>Moved ALL anomalies into CW<br>Split the CW into 3 areas: Biological Wing (Holds 008 and 409), Object Wing (Holds 1025,312,079,093,2950 and 316), Living Wing (Level 1 holds 131, 999, 529, 322, 023, 066, 311, 821 / Level 2 holds 049, 006, 966, 457, 173)<br>Each anomaly cell is specialized to fit it's anomaly (using wikidot)<br>Some of the more "fear-inducing" anomalies have their own soundtracks which underline this feeling<br><br><strong>Scientific Wing</strong><br>Removed all anomaly cells (moved to CW)<br>Added quick-access elevators to TSC and CW<br>Made room for future updates (walk-in fridge, etc lol)<br><br><strong>Center Wing</strong><br>Revamped Star Square<br>Opened the recreational area for future updates<br>Revamped the doors leading in and out<br>Added area for ICA<br><br><strong>Auxiliary Wing</strong><br>Added Transformers Room <strong>Security Wing</strong><br>Revamped hallways<br>Revamped checkpoint ALPHA<br>Added zones for Test Subjects to receive guns (in the armory, touch a gun rack)<br>Added shelter BRAVO<br><br><strong>Administrative Wing</strong><br>Added the office area<br>FED offices<br>SRRF Director office<br>SCED Director office<br>Overall combative rooms (to discuss, etc)<br>HTS Director office<br>R&T Director office<br>Civil department rooms <br>Junior Facility Administrator office<br>Deputy Facility Administrator office<br>Facility Administrator office<br>Added shelter ALPHA<br><br><strong>Intelligence Wing</strong><br>Checkpoint ECHO<br>Interrogation rooms<br>Holding cells<br>Document storage<br>Surveillance room<br>Server room<br>NIIS equipment room<br>Facility Control Room</li>
+    </ul>
+  </div>
+
+  <div class="intro">
+    <h3>Update Log</h3>
+    <ul style="line-height: 1.7; padding-left: 20px;">
+      <li><strong>11-07-2025: </strong>Part 2 Update <br>Better visuals <br>Departments tab <br>Authentication system
+      <br><br>
+      <li><strong>08-07-2025: </strong>Grand Launch
+      <br><br>
+      <li><strong>07-07-2025: </strong>Working on final preparations for the launch <br>Minor changes
+      <br><br>
+      <li><strong>06-07-2025: </strong>Started Website Overhaul Development <br>Overhauled the old realistic database system and went back to the first design <br>New and improved graphics and navigation <br>Other interesting details</li>
+    </ul>
+  </div>
+
+  <div class="intro">
+    <h3>Join our Roleplay</h3>
+    <p>Follow and join the Facility-03 community for news, feedback, and collaboration:</p>
+    <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 15px;">
+      <a href="https://discord.gg/kSyrX5cjXM" target="_blank" style="color: var(--text-accent); text-decoration: none;">
+        <img src="https://img.icons8.com/ios-filled/24/6cb4ff/discord-logo.png" alt="Discord" style="vertical-align: middle;"> Discord
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  &copy; 2025 F-03 Database — Contact: @axilonis, @wicketderework
+</div>
+
+</body>
+</html>

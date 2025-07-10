@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Anomalies - Facility Database</title>
+  <link rel="icon" type="image/x-icon" href="icon.png">
+  <style>
+    :root {
+      --bg-dark: #0e0e10;
+      --bg-panel: #1a1a1d;
+      --bg-accent: #23232b;
+      --text-light: #f0f0f0;
+      --text-accent: #6cb4ff;
+      --border-glow: #6cb4ff88;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom, var(--bg-dark), #1a1a1a);
+      color: var(--text-light);
+    }
+
+    header {
+      background: linear-gradient(to right, #121212, #1e1e1e);
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.8rem;
+      color: #fff;
+      text-shadow: 0 0 5px var(--border-glow);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      background-color: var(--bg-accent);
+      padding: 12px 0;
+      border-bottom: 1px solid #333;
+    }
+
+    nav a {
+      color: var(--text-accent);
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 100%;
+      height: 2px;
+      background: var(--text-accent);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    nav a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      border-bottom: 2px solid var(--text-accent);
+      padding-bottom: 10px;
+      margin-bottom: 30px;
+    }
+
+    .anomaly-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .anomaly-list li {
+      background: var(--bg-panel);
+      padding: 18px 20px;
+      border-left: 4px solid var(--text-accent);
+      border-radius: 6px;
+      margin-bottom: 15px;
+      transition: all 0.2s ease;
+      box-shadow: 0 0 10px #00000055;
+    }
+
+    .anomaly-list li:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 15px var(--border-glow);
+    }
+
+    .anomaly-list a {
+      color: var(--text-accent);
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #aaa;
+      border-top: 1px solid #333;
+      margin-top: 50px;
+    }
+
+    .account-widget {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      z-index: 10;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-panel);
+      padding: 8px 12px;
+      border: 1px solid var(--border-glow);
+      border-radius: 6px;
+      box-shadow: 0 0 10px #00000066;
+      transition: background 0.3s;
+      position: relative;
+      z-index: 2;
+    }
+
+    .user-info:hover {
+      background: var(--bg-accent);
+    }
+
+    .user-info img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      display: none;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-glow);
+      border-radius: 6px;
+      padding: 10px 14px;
+      box-shadow: 0 0 15px #00000088;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      margin-top: 5px;
+      z-index: 1;
+      min-width: 200px;
+    }
+
+    .account-widget:hover .dropdown {
+      display: block;
+    }
+
+.anomaly-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  padding: 20px 20px;
+  max-width: 1500px;  /* limits width */
+  margin: 0 auto;    /* centers it */
+}
+
+.anomaly-card {
+  background: var(--bg-panel);
+  border-left: 4px solid var(--text-accent);
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 0 18px #00000044;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.anomaly-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 25px var(--border-glow);
+}
+
+.anomaly-card h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: var(--text-accent);
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.anomaly-card iframe {
+  width: 100%;
+  height: 700px; /* slightly smaller than before */
+  border: none;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.toggle-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  color: var(--text-accent);
+  margin-bottom: 10px;
+  padding-right: 10px;
+}
+
+.toggle-wrapper h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  flex-grow: 1;
+  color: var(--text-accent);
+}
+
+.toggle-arrow {
+  transition: transform 0.3s ease;
+  font-size: 1.3rem;
+}
+
+.anomaly-card.open .toggle-arrow {
+  transform: rotate(90deg);
+}
+
+.anomaly-content {
+  display: none;
+  margin-top: 15px;
+}
+
+.anomaly-card.open .anomaly-content {
+  display: block;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  background: url('ica.png') repeat-y center;
+  background-size: cover;
+  opacity: 0.2; /* Adjust visibility */
+  z-index: -1;
+  pointer-events: none;
+  mask-image: linear-gradient(to right, black 0%, transparent 25%, transparent 75%, black 100%);
+}
+
+.anomaly-card iframe {
+  width: 100%;
+  height: 700px; /* slightly smaller than before */
+  border: none;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+    .clearence h3 {
+      margin-bottom: 10px;
+      color: #4e5864;
+      text-align: left;
+    }
+
+  </style>
+</head>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const cards = document.querySelectorAll(".anomaly-card");
+
+    cards.forEach(card => {
+      const toggle = card.querySelector(".toggle-wrapper");
+
+      toggle.addEventListener("click", function () {
+        card.classList.toggle("open");
+      });
+    });
+  });
+</script>
+
+<body>
+
+<header>
+  <h1>Facility-03 "Black Dagger" Database</h1>
+  <div class="account-widget">
+    <div class="user-info">
+      <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="User Icon">
+      <span>Local Account</span>
+    </div>
+    <div class="dropdown">
+      <p><strong>Clearance Level:</strong> 4</p>
+      <p><strong>Status:</strong> Logged in anonymously</p>
+      <p><strong>Session ID:</strong> #F03-47329</p>
+      <p><strong>Clearence Key:</strong> level4grandaccesskeynr102</p>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <a href="revamp_home.html">Home</a>
+  <a href="revamp_anomalies.html">Anomalies</a>
+  <a href="revamp_personnel.html">Personnel</a>
+  <a href="revamp_departments.html">Departments</a>
+  <a href="revamp_logs.html">Logs</a>
+  <a href="revamp_net.html">NAAD-Net</a>
+  <a href="revamp_other.html">Other</a>
+</nav>
+
+<div class="container">
+  <h2 class="section-title">Facility Departments</h2>
+  <p style="margin-bottom: 40px; font-size: 1.1rem; color: #ccc;">
+    Below you will find all the operational departments within Facility-03.
+  </p>
+
+  <section>
+    <h2 style="color: var(--text-accent); margin-bottom: 20px;">Active Departments</h2>
+
+    <div class="anomaly-grid">
+
+      <div class="anomaly-card">
+        <div class="toggle-wrapper">
+          <h3>Test Subjects</h3>
+          <span class="toggle-arrow">▶</span>
+        </div>
+        <div class="anomaly-content">
+          <h4>Test Subjects are, like the name suggests, the ones that will be used to test anomalies or do labor which has a high risk of killing EDCE personnel. They know of their past, taken from prisons, either death row or without people that will miss them. This often makes them very volatile, so SCED is always allowed to use force. Most ethical rules don't apply to them.</h4>
+          <p><strong>Confirmed Personnel: </strong><br>Andrew Mike Povaliceanu<br>Kieron Black<br>culttattoo <br>imrach <br>swiftby <br>dwnastarr<br></p>
+          <br>
+          <p><strong>Rank-list: </strong><br>Test Subject</p>
+
+
+        </div>
+      </div>
+
+      <div class="anomaly-card">
+        <div class="toggle-wrapper">
+          <h3>Research & Technology</h3>
+          <span class="toggle-arrow">▶</span>
+        </div>
+        <div class="anomaly-content">
+          <h4>Research & Technology is responsible for researching anomalies and developing technologies to use them for an advantage, mainly in an anomalous war. </h4>
+          <p><strong>Confirmed Personnel: </strong><br>strange_idk <br>astronomynerd._.<br>engineerkittengaming2 <br>hino1 <br>ket_opp <br>olegus2931 <br>eddiuar <br>swiftxrodigo</p>
+          <br>
+          <p><strong>Rank-list: </strong><br>Director of Facility Research <br>Executive Professor <br>Assistant Executive Professor -- HR FAL/AAL 4 <br>Distinguished Professor <br>Senior Professor <br>Professor <br>Assistant Professor -- MR FAL3 <br>Senior Researcher <br>Researcher -- AAL 3 <br>Junior Researcher <br>Student <br>Intern -- LR AAL/FAL2 </p>
+          <br>
+          <p><strong>Related Documents:</strong></p>
+          <div class="anomaly-content">
+            <iframe src="https://docs.google.com/document/d/1FTBB-HKXdMvQBtTqFaCi9HuwboVXd4er/edit?usp=sharing&ouid=101753311055416123393&rtpof=true&sd=true" loading="lazy"></iframe>
+            <br><br>
+            <iframe src="https://docs.google.com/document/d/1qxNsP0IGONJEvHhoAuQEQ6JSufPEctvNK9YqOEvc7wc/edit?usp=sharing" frameborder="0"></iframe>
+            <br><br>
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeukDuYMv7UnmLgnyWfimIJTHH8FZVkLfNqVhKEVxj9Gve8NA/viewform?usp=sf_link" frameborder="0"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="anomaly-card">
+        <div class="toggle-wrapper">
+          <h3>Security & Containment Enforcement Division</h3>
+          <span class="toggle-arrow">▶</span>
+        </div>
+        <div class="anomaly-content">
+          <h4>The Security & Containment Enforcement Division's primary objective is to ensure that no breaches nor hostile personnel pose a threat to the facility. They also are to beat down riots and arrest traitors, as well as solving disputes between other facility personnel.</h4>
+          <p><strong>Confirmed Personnel: </strong><br>william_46477 <br>umplexius <br>totally_not_cyber_at_all <br>amazingrayyan2 <br>payday2enjoyer1 <br>astrogaming_ <br>sprite_axc <br>dylan.1612 <br>soldierboy7_</p>
+          <br>
+          <p><strong>Rank-list: </strong><br>Director of Security -- FAL 4 <br>Colonel <br>Lieutenant Colonel <br>Major <br>Captain  -- HR AAL 4 <br>First Lieutenant <br>Second Lieutenant <br>Chief Master Sergeant  <br>Master Sergeant -- AAL/FAL 3 <br>Staff Sergeant  <br>Sergeant -- MR <br>Corporal  <br>Specialist -- FAL 2 <br>Private First Class -- AAL 2 <br>Private E2  <br>Private E1 -- LR AAL/FAL 1</p>
+          <br>
+          <p><strong>Subdivision: </strong><br>Specialized Rapid Response Forces</p>
+          <br>
+          <p><strong>Related Documents:</strong></p>
+          <iframe src="https://docs.google.com/document/d/1w9FkoyRokC17_RuHh5iRWSyrnGHvuBXzUFp_CgjmASM/edit?tab=t.0#heading=h.77cvf8p1frgw" frameborder="0"></iframe>
+          <br><br>
+          <iframe src="https://docs.google.com/document/d/1iKMxLM79V-UjhZ_K0ZoMd3wdy19B5nrXx4EBP_jRQs4/edit?usp=sharing" frameborder="0"></iframe>
+          <br><br>
+          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc0M1NU5M50z1Anu2GnGtkPKU8n4CtjiCx-OqtLm5aMMBBXtg/viewform?usp=sharing" frameborder="0"></iframe>
+        </div>
+      </div>
+
+      <div class="anomaly-card">
+        <div class="toggle-wrapper">
+          <h3>Health & Trauma Services</h3>
+          <span class="toggle-arrow">▶</span>
+        </div>
+        <div class="anomaly-content">
+          <h4>Health & Trauma Services are the main medical force in the facility. They respond to injuries, perform surgeries or treat psychological issues. They may also respond during times of crisis, to aid the wounded and they are responsible for the morgue as well.</h4>
+          <p><strong>Confirmed Personnel: </strong><br>mysz_zy <br>heartsfromzoex <br>solidute <br>sarkness2335 <br>account_a. <br>justasillyfellow</p>
+          <br>
+          <p><strong>Rank-list: </strong><br>Medical Director -- FAL 4 <br>Chief Medical Officer <br>Senior Medical Officer <br>Medical Officer -- HR AAL 4 <br>Junior Medical Officer  <br>Senior Professor of Medicine  <br>Professor of Medicine  -- AAL/FAL 3 <br>Assistant Professor of Medicine -- MR <br>Senior Physician  <br>Physician -- AAL/FAL 2 <br>Junior Physician  <br>Student  <br>Intern -- LR AAL/FAL 1</p>
+          <br>
+          <p><strong>Detachments:</strong><br>General Medicine Detachment  - Treats minor wounds and other sicknesses <br>Trauma & Surgical Detachment - Treats larger wounds and performs surgery <br>Mental Health Detachment  - Treats mental health problems e.g. PTSD or depression</p>
+        </div>
+      </div>
+
+      <div class="anomaly-card">
+        <div class="toggle-wrapper">
+          <h3>Maintenance & Supply</h3>
+          <span class="toggle-arrow">▶</span>
+        </div>
+        <div class="anomaly-content">
+          <h4>Maintenance & Supply are the main engineering force in the facility. They repair structural damages to the facility, fix technical issues and are in-lore responsible for building the facility. They also are responsible for moving supply crates around the site, and administer new deliveries.</h4>
+          <p><strong>Confirmed Personnel: </strong><br>gamersewe_thatboude <br>nonamelolololol8 <br>lockdownpotato <br>thehighlander30 <br>4fingers231 <br>realbesism_2and1 <br>emil_bjorneklo</p>
+          <br>
+          <p><strong>Rank-list: </strong><br>Chief Engineering Officer-- FAL 4 <br>Senior Engineering Supervisor <br>Engineering Operations Supervisor  -- HR AAL 4 <br>Senior Containment Engineer <br>Containment Engineer -- AAL/FAL 3 <br>Junior Containment Engineer  -- MR  <br>Senior System Technician -- FAL 2 <br>Systems Technician  -- AAL 2 <br>Junior Systems Technician  <br>Engineering Support -- LR AAL/FAL 1</p>
+          <br>
+          <p><strong>Detachments: </strong><br>Applied Containment Engineering Detachment  - Keeps all containment cells up to date and repairs damages <br>Electro-Technical Engineering Detachment  - Responds to electrical problems around the facility</p>
+        </div>
+      </div>
+
+      <div class="anomaly-card">
+        <div class="toggle-wrapper">
+          <h3>NATO Intelligence & Internal Security</h3>
+          <span class="toggle-arrow">▶</span>
+        </div>
+        <div class="anomaly-content">
+          <h4>N.I.I.S is responsible for maintaining intelligence and internal security across the entirety of N.A.A.D. Most operations, details and concepts about N.I.I.S are intentionally kept discreet and hidden from regular staff. </h4>
+          <p><strong>Confirmed Personnel: </strong><br>dani56 <br>kamilos_30660 <br>_thestrangeone <br>axilonis</p>
+          <br>
+          <p><strong>Rank-list: </strong><br>Commissioner of Intelligence -- AAL-5 <br>Executive Authority <br>Deputy Executive Authority -- IAL-5 <br>Central Administrator <br>Central Officer -- IAL-4 <br>Principal Agent <br>Regional Supervisor -- AAL-4 <br>Appointed Liaison <br>Case Officer -- AAL-3 <br>Senior Agent -- IAL-3 <br>Specialized Agent <br>Field Agent <br>Initiated Agent <br>Entry Agent -- AAL-2/IAL-2</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<div class="footer">
+  &copy; 2025 F-03 Database — Contact: @axilonis, @wicketderework
+</div>
+
+</body>
+</html>
