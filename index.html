@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Clearance Login</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0d1117;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background-color: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 10px;
+      padding: 30px 40px;
+      width: 340px;
+      box-shadow: 0 0 15px rgba(0, 123, 255, 0.3);
+    }
+
+    .login-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #58a6ff;
+    }
+
+    .label {
+      font-weight: bold;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      color: #c9d1d9;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #30363d;
+      background-color: #0d1117;
+      color: white;
+      border-radius: 6px;
+      font-size: 14px;
+      margin-bottom: 20px;
+      outline: none;
+
+    }
+
+    input[type="text"]:focus {
+      border-color: #58a6ff;
+      box-shadow: 0 0 5px rgba(88, 166, 255, 0.6);
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #238636;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    button:hover {
+      background-color: #2ea043;
+    }
+
+    .error {
+      color: #f85149;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .status-box {
+      margin-top: 25px;
+      background-color: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 15px;
+      font-size: 14px;
+      color: #8b949e;
+      text-align: center;
+    }
+
+    .status-box strong {
+      color: #c9d1d9;
+    }
+
+    .highlight {
+      color: #58a6ff;
+    }
+
+    .input-button-row {
+      display: flex;
+      gap: 10px; /* space between input and button */
+      margin-bottom: 20px;
+    }
+
+    .input-button-row input[type="text"] {
+      flex: 1;
+      margin-bottom: 0; /* remove original bottom margin */
+    }
+
+    .input-button-row button {
+      flex-shrink: 0;
+      width: auto;
+      padding: 10px 16px;
+    }
+
+
+
+
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Facility-03 Database</h2>
+    <label class="label"></label>
+    <div class="input-button-row">
+      <input type="text" id="authKey" placeholder="Enter authentication key..." />
+      <button onclick="authenticate()">Login</button>
+    </div>
+
+
+    <div class="status-box">
+      <div>Please pass this security checkpoint</div>
+      <div>to continue browsing the database.</div>
+      <div><strong>Session ID:</strong> <span class="highlight">#F03-47329</span></div>
+    </div>
+  </div>
+
+  <script>
+    const keys = {
+      "level1privatekeynr18723": "revamp_home1.html",
+      "level2privatekeynr81927436": "revamp_home2.html2",
+      "level3privatekeynr17234165318794": "revamp_home3.html",
+      "level4grandaccesskeynr102": "revamp_home4.html",
+      "level5councilaccesskeynr6":"fake.html"
+    };
+
+    function authenticate() {
+      const inputKey = document.getElementById("authKey").value.trim();
+      const errorDiv = document.getElementById("errorMsg");
+
+      if (keys[inputKey]) {
+        window.location.href = keys[inputKey];
+      } else {
+        errorDiv.textContent = "Invalid key. Access denied.";
+      }
+    }
+  </script>
+</body>
+</html>
