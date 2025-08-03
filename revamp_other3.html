@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Anomalies - Facility Database</title>
+  <title>NAAD-Net - Facility Database</title>
   <link rel="icon" type="image/x-icon" href="icon.png">
   <style>
     :root {
@@ -71,44 +71,53 @@
     }
 
     .container {
-      max-width: 1300px;
+      max-width: 1000px;
       margin: auto;
-      padding: 40px 20px;
+      padding: 30px 20px;
     }
 
     .section-title {
       font-size: 2rem;
+      margin-bottom: 30px;
       border-bottom: 2px solid var(--text-accent);
       padding-bottom: 10px;
-      margin-bottom: 30px;
+      text-align: left;
     }
 
-    .anomaly-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
+    .incident-log {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
 
-    .anomaly-list li {
+    .incident-box {
       background: var(--bg-panel);
-      padding: 18px 20px;
+      padding: 20px;
       border-left: 4px solid var(--text-accent);
-      border-radius: 6px;
-      margin-bottom: 15px;
-      transition: all 0.2s ease;
-      box-shadow: 0 0 10px #00000055;
+      border-radius: 8px;
+      box-shadow: 0 0 8px #00000066;
+      transition: all 0.25s ease;
     }
 
-    .anomaly-list li:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 0 15px var(--border-glow);
+    .incident-box:hover {
+      transform: scale(1.01);
+      box-shadow: 0 0 12px var(--border-glow);
     }
 
-    .anomaly-list a {
+    .incident-box h3 {
+      margin-top: 0;
       color: var(--text-accent);
-      text-decoration: none;
-      font-size: 1.2rem;
-      font-weight: bold;
+    }
+
+    .incident-meta {
+      font-size: 0.9rem;
+      color: #aaa;
+      margin-bottom: 10px;
+    }
+
+    .incident-summary {
+      font-size: 1rem;
+      line-height: 1.6;
     }
 
     .footer {
@@ -120,7 +129,7 @@
       margin-top: 50px;
     }
 
-    .account-widget {
+        .account-widget {
       position: absolute;
       top: 20px;
       right: 25px;
@@ -170,82 +179,7 @@
     .account-widget:hover .dropdown {
       display: block;
     }
-
-.anomaly-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 40px;
-  padding: 20px 20px;
-  max-width: 1500px;  /* limits width */
-  margin: 0 auto;    /* centers it */
-}
-
-.anomaly-card {
-  background: var(--bg-panel);
-  border-left: 4px solid var(--text-accent);
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 0 18px #00000044;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.anomaly-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 0 25px var(--border-glow);
-}
-
-.anomaly-card h3 {
-  margin-top: 0;
-  font-size: 1.5rem;
-  color: var(--text-accent);
-  margin-bottom: 20px;
-  line-height: 1.4;
-}
-
-.anomaly-card iframe {
-  width: 100%;
-  height: 700px; /* slightly smaller than before */
-  border: none;
-  border-radius: 8px;
-  background-color: #fff;
-}
-
-.toggle-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  user-select: none;
-  color: var(--text-accent);
-  margin-bottom: 10px;
-  padding-right: 10px;
-}
-
-.toggle-wrapper h3 {
-  margin: 0;
-  font-size: 1.5rem;
-  flex-grow: 1;
-  color: var(--text-accent);
-}
-
-.toggle-arrow {
-  transition: transform 0.3s ease;
-  font-size: 1.3rem;
-}
-
-.anomaly-card.open .toggle-arrow {
-  transform: rotate(90deg);
-}
-
-.anomaly-content {
-  display: none;
-  margin-top: 15px;
-}
-
-.anomaly-card.open .anomaly-content {
-  display: block;
-}
-
+    
 body::before {
   content: "";
   position: fixed;
@@ -269,21 +203,6 @@ body::before {
 
   </style>
 </head>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const cards = document.querySelectorAll(".anomaly-card");
-
-    cards.forEach(card => {
-      const toggle = card.querySelector(".toggle-wrapper");
-
-      toggle.addEventListener("click", function () {
-        card.classList.toggle("open");
-      });
-    });
-  });
-</script>
-
 <body>
 
 <header>
@@ -297,89 +216,243 @@ body::before {
       <p><strong>Clearance Level:</strong> 3</p>
       <p><strong>Status:</strong> Logged in anonymously</p>
       <p><strong>Session ID:</strong> #F03-47329</p>
-      <p><strong>Clearance Key:</strong> level3privatekeynr17234165318794</p>
+      <p><strong>Clearence Key:</strong> level3privatekeynr17234165318794</p>
     </div>
   </div>
 </header>
 
 <nav>
-  <a href="revamp_home3.html">Home</a>
-  <a href="revamp_anomalies3.html">Anomalies</a>
-  <a href="revamp_personnel3.html">Personnel</a>
-  <a href="revamp_departments3.html">Departments</a>
-  <a href="revamp_logs3.html">Logs</a>
-  <a href="revamp_net3.html">NAAD-Net</a>
-  <a href="revamp_other3.html">Other</a>
+  <a href="revamp_home1.html">Home</a>
+  <a href="revamp_anomalies1.html">Anomalies</a>
+  <a href="revamp_personnel1.html">Personnel</a>
+  <a href="revamp_departments1.html">Departments</a>
+  <a href="revamp_logs1.html">Logs</a>
+  <a href="revamp_net1.html">NAAD-Net</a>
+  <a href="revamp_other1.html">Other</a>
 </nav>
 
 <div class="container">
-  <h2 class="section-title">Other Documents</h2>
+  <h2 class="section-title">NAAD-Net</h2>
   <p style="margin-bottom: 40px; font-size: 1.1rem; color: #ccc;">
-    Below you'll find other documents about F-03, NAAD, and extras that do not necessarily need a separate category of documents.
+    Below you'll find a collection of exchanged mails between staff in NAAD's official Net Forum.
   </p>
-
-  <!-- Canon Entries -->
-  <section>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>Roleplay Information</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <iframe src="https://docs.google.com/document/d/1UPPsdxZIfidxagQFAUmpAWvO5TZLJcHi5MY9w_wRa3Y/edit?usp=drivesdk" loading="lazy"></iframe>
-        </div>
-      </div>
-    </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>Coded Protocols</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <iframe src="https://docs.google.com/document/d/1Yotf0Qvz3w4zLcxctTrUV4-tS_0t9b8ZZ8RZzjfXGCE/edit?usp=sharing" loading="lazy"></iframe>
-        </div>
-      </div>
-    </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>Statute of NAAD</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <iframe src="https://docs.google.com/document/d/1BHoKZdijqbHUKskOg1IusZm3b2DdAvY6FfOdwmYaQ7g/edit?usp=sharing " loading="lazy"></iframe>
-        </div>
-      </div>
-    </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>Information Document</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <iframe src="https://docs.google.com/document/d/1UPPsdxZIfidxagQFAUmpAWvO5TZLJcHi5MY9w_wRa3Y/edit?tab=t.vaqgwhaqxfmv" loading="lazy"></iframe>
-        </div>
-      </div>
-    </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>NORTH ATLANTIC ANOMALOUS DEFENSE</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <iframe src="https://docs.google.com/document/d/17aZxqbcb1LMCNMHT5QtCIA-hZSRk-kmTmKcbBsRCGzc/edit?usp=sharing" loading="lazy"></iframe>
-        </div>
-      </div>
-    </div>
-
-  </section>
+  
+  <div class="incident-log">
 
 
+<div class="incident-box">
+  <h3>Fate of Arthur L.</h3>
+  <div class="incident-meta">
+    <strong>Date:</strong> 13-07-1984 &nbsp;
+    <br><br>
+  </div>
+  <div class="incident-summary">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="User Icon">
+    <br>
+    <strong>From:</strong> johann.kramer@naadnet<br>
+    <strong>To:</strong> Ethics Department & Higher-Ups<br>
+    <strong>Subject:</strong> Arthur L. has just submitted his final interrogation report to me. I will soon log the full interrogation, but for now, I must provide you with a summary report. He admitted to being guilty and confirmed that he was forced to take the needles. However, Hiesn D. was not the one giving the orders, meaning we still need to locate the rogue personnel responsible for issuing those instructions. Additionally, Arthur L. has violated Rules: A1.2, A1.4, A1.7, and B1.10. I request a final decision regarding the fate of Arthur L. Please report back promptly. <br>Kind regards, <br>Agent Krämer
+  </div>
+</div>
+<br>
 
+
+<div class="incident-box">
+  <h3>AN-5673 Haircut</h3>
+  <div class="incident-meta">
+    <strong>Date:</strong> 12-07-1984 &nbsp;
+    <br><br>
+  </div>
+  <div class="incident-summary">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="User Icon">
+    <br>
+    <strong>From:</strong> lilywalker@naadnet<br>
+    <strong>To:</strong> milia@naadnet<br>
+    <strong>Subject:</strong> Greetings, one of your students here. So um, AN-5673 gave me a haircut a while ago and now I'm blonde. I thought I could easily wash it off but when I tried to it didn't wash off. I'm unsure how AN-5673 made me blonde but I'm afraid to ask him to change it back. I'm also unsure if it has any anomalous abilities or not as well. <br>AN-5673 has also created two bots. The Mark-2 Grey. Which does stuff like cleaning and things similar to that. And the Mark-2 Black. Which is a combatant bot. Those 2 bots including him has helped us. Though due to the breaches he has done I wouldn't trust  him that much incase hes just trying to get our trust
+  </div>
+</div>
+<br>
+
+
+<div class="incident-box">
+  <h3>AN-311</h3>
+  <div class="incident-meta">
+    <strong>Date:</strong> 09-07-1984 &nbsp;
+    <br><br>
+  </div>
+  <div class="incident-summary">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="User Icon">
+    <br>
+    <strong>From:</strong> benjaminhart@edcenet<br>
+    <strong>To:</strong> drlery@edcenet<br>
+    <strong>Subject:</strong> First, we brought a corpse from a recent test into cold storage at medical bay. To describe it shortly, his ability to breathe was taken away by AN-311. Please figure out every possible detail on the subject's death and inform me. Cremate afterwards or do whatever, I don't know. <br>Second, if AN-311 breaches again, report every death by it and every detail. Try to save at least one victim. It would be very beneficial to us, we need to confirm if it's possible or not. Thank you in advance.
+    <br><br>
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="User Icon">
+    <br>
+    <strong>From:</strong> drlery@edcenet<br>
+    <strong>To:</strong> benjaminhart@edcenet <br>
+    <strong>Subject:</strong> This has been noted and I'll study the causes, as well as finding out what I can to help against AN-311. I'll try to keep you updated on the situation posthaste.
+  </div>
+</div>
+<br>
+
+
+<div class="incident-box">
+  <h3>Test Subject Weapons</h3>
+  <div class="incident-meta">
+    <strong>Date:</strong> 18-06-1984 &nbsp;
+    <br><br>
+  </div>
+  <div class="incident-summary">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="User Icon">
+    <br>
+    <strong>From:</strong> samuelseed@naadnet<br>
+    <strong>To:</strong> col.arnold@naadnet<br>
+    <strong>Subject:</strong> As I have told you last shift, a test subject told me about how they get their weapons. He explained, that they use the feet of chairs, etc. to build knives and shivs out of it. He just told me that while we were casually talking. He also threatened me, since I ate a chocolate candy bar right in front of his eyes. I have the footage on my bodycam, it is attached.
+    <br><br>
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="User Icon"><br>
+    <strong>From:</strong> col.arnold @naadnet<br>
+    <strong>To:</strong> samuelseed@naadnet<br>
+    <strong>Subject:</strong> Dear Samuel Seed, With the look into it I have come to conclusion further investigations must be conducted on how the test subject managed to achieve a gun. If he is still alive the subject. Probably not. If he does we should question him. In other note, the Test Subjects somehow achieve guns by that we should probably do drastic measures. You will be updated on it.
+    <br><br>
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="User Icon"><br>
+    <strong>From:</strong> samuelseed@naadnet<br>
+    <strong>To:</strong> col.arnold@naadnet<br>
+    <strong>Subject:</strong> I am sorry if my message didn't properly specify, but the Test Subjects did not create guns, but they built themselves blunt and sharp weapons for melee combat. I think we should be much more careful when entering their cells. 
+    <br><br>
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="User Icon"><br>
+    <strong>From:</strong> col.arnold@naadnet<br>
+    <strong>To:</strong> samuelseed@naadnet<br>
+    <strong>Subject:</strong> Uh… how the hell did they sharp it up? As Well how the hell did they break the chairs… these chairs are made not from strongest metal, but still you need a saw to cut through… Guess we have to take drastic measures… We have to replace the chairs with plastic ones. Plastic can be sharp however it is very hard to sharp it as well harder to make it into a melee weapon and soft when trying hit someone with it.
+    <br><br>
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="User Icon"><br>
+    <strong>From:</strong> samuelseed@naadnet<br>
+    <strong>To:</strong> col.arnold@naadnet<br>
+    <strong>Subject:</strong> Better idea: We use benches that we anchor to the floor. Use steel for them, they won't be able to break those.
+  </div>
+</div>
+
+<br>
+<div class="incident-box">
+  <h3>Regarding worries from AN-772</h3>
+  <div class="incident-meta">
+    <strong>Date:</strong> 25-04-1984 &nbsp;
+    <br><br>
+  </div>
+  <div class="incident-summary">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="User Icon">
+    <br>
+    <strong>From:</strong> miliasondelos@edcenet<br>
+    <strong>To:</strong> benjaminhart@edcenet<br>
+    <strong>Subject:</strong> Hey I just saw your logs today and you said that breached again? This is quite getting out of hand, look I quite need you to make another design or make the previous design even better. 5x5 Concrete with 10 millions lumens if that exist... isn't going to help since we would just waste the facility electricity bills. All I'm going to suggest is add backup generators for the lights in AN-772 containment.
+    <br><br>
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="User Icon"><br>
+    <strong>From:</strong> benjaminhart@edcenet<br>
+    <strong>To:</strong> miliasondelos@edcenet<br>
+    <strong>Subject:</strong> Are you serious right now?
+  </div>
+</div>
+<br>
+<div class="incident-box">
+  <h3>Anomaly 1025</h3>
+  <div class="incident-meta">
+    <strong>Date:</strong> 19-04-1984 &nbsp;
+    <br><br>
+  </div>
+  <div class="incident-summary">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="User Icon">
+    <br>
+    <strong>From:</strong> benjaminhart@edcenet<br>
+    <strong>To:</strong> director.wicket@edcenet<br>
+    <strong>Subject:</strong> Today's testing session on Anomaly 1025 has been partially successful. Full report can be found in the archive. <br> https://docs.google.com/document/d/1DG5a-eURkRai48jF2WVk3dY9jvihxuuhP_D9dNHG_8w/edit?usp=sharing<br>The reason I'm directly messaging facility administration is to request authorization for further testing with the retrieved film under oversight of medical and security personnel due to the possible biological hazard. This could become a great discovery regarding the anomaly. In an alternative case, the film must likely be destroyed for safety purposes.
+    <br><br>
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="User Icon"><br>
+    <strong>From:</strong> director.wicket@edcenet<br>
+    <strong>To:</strong> benjaminhart@edcenet<br>
+    <strong>Subject:</strong> I've read the file and your idea seems interesting and could bear fruits which we can profit from. You may conduct further research, but make sure there are always guards nearby that are **NOT** looking at the images, in case something goes sideways.
+  </div>
+</div>
+<br>
+<div class="incident-box">
+  <h3>Mentally Ill Person</h3>
+  <div class="incident-meta">
+    <strong>Date:</strong> 11-04-1984 &nbsp;
+    <br><br>
+  </div>
+  <div class="incident-summary">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="User Icon">
+    <br>
+    <strong>From:</strong> andrewsaunders@edcenet<br>
+    <strong>To:</strong> htsgroup@edcenet<br>
+    <strong>Subject:</strong> Greetings Medical staff, two personnel start gaining dementia out of nowhere, seriously out of nowhere, lets begin. <br>Some Engineer called Besism was reported for stealing some wallet of Dr.Jojo, they had a chase when F.E.D. asked me to arrest bes I would, following that Besism was shot on his legs with rubber bullets I patched the wounds if bleeding up and moved him to the court room as requested by the F.E.D. However the DoctorJojo followed me and annoyed me, with that the engineer escapes and then chase begins until... out of nowhere Besism and Jojo start talking about their pass life with something remakrs of being an Head Engineer for Besism and for Jojo being some Junior Researcher? Anyways, they gained amnesia or dementia out of the sudden, they both got putted on the court house, Besism was relocated(left at some point) while Jojo remained he start talking nonsense. <br>So hereby I am requesting you to get them in an aslyum  and give them therapy, and don't mail saying:"We don't got a theraptist" that is not my problem get one then. And also ignore them if they say Site-19...<br>Regards,<br>Corporal Andrew Saunnders
+    </div>
+</div>
+<br>
+<div class="incident-box">
+  <h3>Interview AN-821</h3>
+  <div class="incident-meta">
+    <strong>Date:</strong> 11-04-1984 &nbsp;
+    <br><br>
+  </div>
+  <div class="incident-summary">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="User Icon">
+    <br>
+    <strong>From:</strong> miliasondelos@edcenet<br>
+    <strong>To:</strong> benjaminhart@edcenet<br>
+    <strong>Subject:</strong> Hey Dr. Benjamin, look apologies about yesterday and I know this isn't perfect time but uhh... could we at least Interview it first so we know more about him? I don't mind if you don't wanna come but If you have any suggestions let me know so I can try use it.
+    <br><br>
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="User Icon"><br>
+    <strong>From:</strong> benjaminhart@edcenet<br>
+    <strong>To:</strong> miliasondelos@edcenet<br>
+    <strong>Subject:</strong> If I'm available [Still working with 1025], I'll be there but please, this time read the darn paper about it. During it's discovery, apparently, it used an unknown language that we've yet to discover. Since we don't have any trained personnel available, try and prepare a few question in multiple languages, maybe Latin, maybe Aramaic, anything you would see fitting. Get an answer, record it and send it to an actual translator. It is our only way of communication in my opinion.<br>
+  </div>
+</div>
+<br>
+<div class="incident-box">
+  <h3>Permission to research AN-821</h3>
+  <div class="incident-meta">
+    <strong>Date:</strong> 09-04-1984 &nbsp;
+    <br><br>
+  </div>
+  <div class="incident-summary">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="User Icon">
+    <br>
+    <strong>From:</strong> miliasondelos@edcenet<br>
+    <strong>To:</strong> director.wicket@edcenet<br>
+    <strong>Subject:</strong> Hey hey hey again! Sooo I've just heard about this anomaly that's like a huge angel thing? And I got interested by it so I wanna try do research/test on it but my clearance level is too low so maybe I was wonder If I can have your authority to research about AN-821?
+    <br><br>
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="User Icon"><br>
+    <strong>From:</strong> director.wicket@edcenet<br>
+    <strong>To:</strong> miliasondelos@edcenet<br>
+    <strong>Subject:</strong> You may research it. Follow all protocols.<br>
+  </div>
+</div>
+<br>
+<div class="incident-box">
+  <h3>Temporary Clearence</h3>
+  <div class="incident-meta">
+    <strong>Date:</strong> 28-03-1984 &nbsp;
+    <br><br>
+  </div>
+  <div class="incident-summary">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="User Icon">
+    <br>
+    <strong>From:</strong> miliasondelos@edcenet<br>
+    <strong>To:</strong> director.wicket@edcenet<br>
+    <strong>Subject:</strong> Heyy big purple guy! Can me and my other fellow scientist to have like Clearance 2 or 3 temporary? It's for testing anomalies since we're lacking high ranks sooo... But hey If you want me to pick which I'll pick to have tempory just tell me.
+    <br><br>
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="User Icon"><br>
+    <strong>From:</strong> director.wicket@edcenet<br>
+    <strong>To:</strong> miliasondelos@edcenet<br>
+    <strong>Subject:</strong> You, only you, have been granted AAC-3 and IAL-2 for 7 days, the moment this mail has been sent.<br>
+  </div>
+</div>
+
+
+    <!-- More incidents here -->
+    
+  </div>
+</div>
 
 <div class="footer">
   &copy; 2025 F-03 Database — Contact: @axilonis, @wicketderework
