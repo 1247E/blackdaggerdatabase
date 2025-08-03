@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Entry1</title>
+  <style>
+    @font-face {
+      font-family: 'Wingdings';
+      src: url('wingdings.tff') format('tff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    body {
+      background-color: black;
+      color: white;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 64px;
+      white-space: pre-line;
+      padding: -3em;
+      overflow: hidden;
+    }
+
+    #text {
+      font-family: 'Wingdings', sans-serif;
+    }
+
+    .shaky {
+      display: inline-block;
+      animation: shake 0.1s infinite;
+    }
+
+    @keyframes shake {
+      0% { transform: translate(0px, 0px); }
+      25% { transform: translate(1px, -1px); }
+      50% { transform: translate(-1px, 1px); }
+      75% { transform: translate(1px, 1px); }
+      100% { transform: translate(-1px, -1px); }
+    }
+
+  </style>
+</head>
+<body>
+
+<audio id="bgm" src="glaceir.mp3" loop></audio>
+<audio id="type1" src="gaster0.mp3"></audio>
+<audio id="type2" src="gaster2.mp3"></audio>
+<audio id="type3" src="gaster3.mp3"></audio>
+<audio id="type4" src="gaster4.mp3"></audio>
+<audio id="type5" src="gaster5.mp3"></audio>
+<audio id="type6" src="gaster6.mp3"></audio>
+<audio id="type7" src="gaster7.mp3"></audio>
+
+<div id="text"></div>
+
+<script>
+  const entryText = [
+    "ENTRY NUMBER 1",
+    "I HAVE RATHER BEEN OBSERVING",
+    "SUPERVISING, EVEN.",
+    "YOU NAIVE HUMANS",
+    "BUT, MY OBSERVATIONS WERE INDEED",
+    "INTRIGUING.",
+    "SAY, HAVE YOU EVER WATCHED",
+    "A LESSER FORM OF LIFE COEXIST?",
+    ""
+  ];
+
+
+
+  const textContainer = document.getElementById("text");
+  const bgm = document.getElementById("bgm");
+  const typeSounds = [
+    document.getElementById("type1"),
+    document.getElementById("type2"),
+    document.getElementById("type3"),
+    document.getElementById("type4"),
+    document.getElementById("type5"),
+    document.getElementById("type6"),
+    document.getElementById("type7"),
+  ];
+
+  let currentIndex = 0;
+  let isTyping = false;
+  let bgmStarted = false;
+
+  function playRandomTypeSound() {
+    const sound = typeSounds[Math.floor(Math.random() * typeSounds.length)];
+    sound.currentTime = 0;
+    sound.play();
+  }
+
+  function typeLine(line, callback) {
+    isTyping = true;
+    let i = 0;
+    textContainer.innerHTML = ""; // Clear previous line
+    function typeChar() {
+      if (i < line.length) {
+        const span = document.createElement("span");
+        span.textContent = line[i];
+        span.classList.add("shaky");
+        textContainer.appendChild(span);
+        playRandomTypeSound();
+        i++;
+        setTimeout(typeChar, 50 + Math.random() * 100);
+      } else {
+        isTyping = false;
+        if (callback) callback();
+      }
+    }
+    typeChar();
+  }
+
+  function showNextLine() {
+    if (isTyping || currentIndex >= entryText.length) return;
+    typeLine(entryText[currentIndex], () => {
+      currentIndex++;
+    });
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "z" || e.key === "Z") {
+      if (!bgmStarted) {
+        bgm.play().catch(() => {});
+        bgmStarted = true;
+      }
+      showNextLine();
+    }
+  });
+</script>
+
+</body>
+</html>
