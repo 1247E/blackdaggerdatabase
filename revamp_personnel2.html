@@ -261,29 +261,10 @@ body::before {
   mask-image: linear-gradient(to right, black 0%, transparent 25%, transparent 75%, black 100%);
 }
 
-    .redacted {
-      position: relative;
-      display: inline-block;
-      color: transparent;
-      background-color: rgba(26,26,29,255);
-      overflow: hidden;
-    }
-
-    .redacted::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        radial-gradient(black 30%, transparent 30%),
-        radial-gradient(black 30%, transparent 30%);
-      background-size: 4px 4px;
-      background-position: 0 0, 2px 2px;
-      animation: noise 0.3s infinite;
-      opacity: 0.5;
-      pointer-events: none;
+    .clearence h3 {
+      margin-bottom: 10px;
+      color: #4e5864;
+      text-align: left;
     }
 
 
@@ -323,13 +304,13 @@ body::before {
 </header>
 
 <nav>
-  <a href="revamp_home2.html">Home</a>
-  <a href="revamp_anomalies2.html">Anomalies</a>
-  <a href="revamp_personnel2.html">Personnel</a>
-  <a href="revamp_departments2.html">Departments</a>
-  <a href="revamp_logs2.html">Logs</a>
-  <a href="revamp_net2.html">NAAD-Net</a>
-  <a href="revamp_other2.html">Other</a>
+  <a href="revamp_home.html">Home</a>
+  <a href="revamp_anomalies.html">Anomalies</a>
+  <a href="revamp_personnel.html">Personnel</a>
+  <a href="revamp_departments.html">Departments</a>
+  <a href="revamp_logs.html">Logs</a>
+  <a href="revamp_net.html">NAAD-Net</a>
+  <a href="revamp_other.html">Other</a>
 </nav>
 
 <div class="container">
@@ -341,6 +322,39 @@ body::before {
   <!-- Canon Entries -->
   <section>
     <h2 style="color: var(--text-accent); margin-bottom: 20px;">Current Canon Entries</h2>
+    <div class="anomaly-grid">
+      <div class="anomaly-card">
+        <div class="toggle-wrapper">
+          <h3>Agent Johann Kramer</h3>
+          <span class="toggle-arrow">▶</span>
+        </div>
+        <div class="anomaly-content">
+          <iframe src="https://docs.google.com/document/d/1dfzIB0T_Wvy1SZZkiMEuB-TSiBz0nhvBf9HSm7VApEE/edit?usp=sharing" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="anomaly-grid">
+      <div class="anomaly-card">
+        <div class="toggle-wrapper">
+          <h3>Simon "Security" Scott</h3>
+          <span class="toggle-arrow">▶</span>
+        </div>
+        <div class="anomaly-content">
+          <iframe src="https://docs.google.com/document/d/13N7ansB9jNuE0vpagZXGITYBGfp0kS1Fgbs1I-h6Mzs/edit?usp=sharing" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="anomaly-grid">
+      <div class="anomaly-card">
+        <div class="toggle-wrapper">
+          <h3>Lazaro K. Richeze</h3>
+          <span class="toggle-arrow">▶</span>
+        </div>
+        <div class="anomaly-content">
+          <iframe src="https://docs.google.com/document/d/1ndZu3YaAqLhZ5pZIxKzuB1kdHGiAccwhGlqvArYYEAo/edit?tab=t.0" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
     <div class="anomaly-grid">
       <div class="anomaly-card">
         <div class="toggle-wrapper">
@@ -411,7 +425,7 @@ body::before {
 
   <!-- Legacy Entries -->
   <section style="margin-top: 80px;">
-    <h2 style="color: #999; margin-bottom: 20px;">Legacy Entries (Not-Canon)</h2>
+    <h3 style="color: #999; margin-bottom: 20px;">Legacy Entries (Not-Canon)</h3>
     <div class="anomaly-grid">
       <div class="anomaly-card">
         <div class="toggle-wrapper">
