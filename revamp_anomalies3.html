@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Anomalies - Facility Database</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Facility Database</title>
   <link rel="icon" type="image/x-icon" href="icon.png">
   <style>
     :root {
@@ -71,44 +71,95 @@
     }
 
     .container {
-      max-width: 1300px;
+      max-width: 1200px;
       margin: auto;
-      padding: 40px 20px;
+      padding: 30px 20px;
     }
 
-    .section-title {
-      font-size: 2rem;
-      border-bottom: 2px solid var(--text-accent);
-      padding-bottom: 10px;
-      margin-bottom: 30px;
-    }
-
-    .anomaly-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .anomaly-list li {
+    .intro {
       background: var(--bg-panel);
-      padding: 18px 20px;
+      padding: 25px;
       border-left: 4px solid var(--text-accent);
-      border-radius: 6px;
-      margin-bottom: 15px;
-      transition: all 0.2s ease;
-      box-shadow: 0 0 10px #00000055;
+      margin-bottom: 35px;
+      border-radius: 8px;
+      transition: all 0.25s ease;
+      box-shadow: 0 0 8px #00000088;
     }
 
-    .anomaly-list li:hover {
-      transform: translateY(-3px);
+    .intro:hover {
+      transform: translateY(-5px) scale(1.02);
       box-shadow: 0 0 15px var(--border-glow);
     }
 
-    .anomaly-list a {
+    .intro h2 {
+      margin-top: 0;
+      font-size: 1.8rem;
       color: var(--text-accent);
-      text-decoration: none;
-      font-size: 1.2rem;
+    }
+
+    .intro p {
+      line-height: 1.6;
+      font-size: 1.05rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      margin-top: 40px;
+      border-bottom: 2px solid var(--text-accent);
+      padding-bottom: 8px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      margin-top: 25px;
+    }
+
+    .card {
+      background: linear-gradient(to bottom, #1c1c1f, #222225);
+      border: 1px solid #2b2b2b;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      transition: all 0.25s ease;
+      box-shadow: 0 0 10px transparent;
+    }
+
+    .card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 0 15px var(--border-glow);
+    }
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+
+    .card h3 {
+      margin-top: 5px;
+      color: var(--text-accent);
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    a.read-more {
+      color: var(--text-accent);
       font-weight: bold;
+      display: inline-block;
+      margin-top: 10px;
+      transition: color 0.3s ease;
+    }
+
+    a.read-more:hover {
+      color: #9ecfff;
     }
 
     .footer {
@@ -120,129 +171,54 @@
       margin-top: 50px;
     }
 
-    .account-widget {
-      position: absolute;
-      top: 20px;
-      right: 25px;
-      z-index: 10;
-    }
-
-    .user-info {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--bg-panel);
-      padding: 8px 12px;
-      border: 1px solid var(--border-glow);
-      border-radius: 6px;
-      box-shadow: 0 0 10px #00000066;
-      transition: background 0.3s;
-      position: relative;
-      z-index: 2;
-    }
-
-    .user-info:hover {
-      background: var(--bg-accent);
-    }
-
-    .user-info img {
-      width: 20px;
-      height: 20px;
-    }
-
-    .dropdown {
-      position: absolute;
-      top: 100%;
-      right: 0;
-      display: none;
-      background: var(--bg-panel);
-      border: 1px solid var(--border-glow);
-      border-radius: 6px;
-      padding: 10px 14px;
-      box-shadow: 0 0 15px #00000088;
-      font-size: 0.85rem;
-      line-height: 1.5;
-      margin-top: 5px;
-      z-index: 1;
-      min-width: 200px;
-    }
-
-    .account-widget:hover .dropdown {
-      display: block;
-    }
-
-.anomaly-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 40px;
-  padding: 20px 20px;
-  max-width: 1500px;  /* limits width */
-  margin: 0 auto;    /* centers it */
+.account-widget {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  z-index: 10;
 }
 
-.anomaly-card {
-  background: var(--bg-panel);
-  border-left: 4px solid var(--text-accent);
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 0 18px #00000044;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.anomaly-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 0 25px var(--border-glow);
-}
-
-.anomaly-card h3 {
-  margin-top: 0;
-  font-size: 1.5rem;
-  color: var(--text-accent);
-  margin-bottom: 20px;
-  line-height: 1.4;
-}
-
-.anomaly-card iframe {
-  width: 100%;
-  height: 700px; /* slightly smaller than before */
-  border: none;
-  border-radius: 8px;
-  background-color: #fff;
-}
-
-.toggle-wrapper {
+.user-info {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  user-select: none;
-  color: var(--text-accent);
-  margin-bottom: 10px;
-  padding-right: 10px;
+  gap: 8px;
+  background: var(--bg-panel);
+  padding: 8px 12px;
+  border: 1px solid var(--border-glow);
+  border-radius: 6px;
+  box-shadow: 0 0 10px #00000066;
+  transition: background 0.3s;
+  position: relative;
+  z-index: 2;
 }
 
-.toggle-wrapper h3 {
-  margin: 0;
-  font-size: 1.5rem;
-  flex-grow: 1;
-  color: var(--text-accent);
+.user-info:hover {
+  background: var(--bg-accent);
 }
 
-.toggle-arrow {
-  transition: transform 0.3s ease;
-  font-size: 1.3rem;
+.user-info img {
+  width: 20px;
+  height: 20px;
 }
 
-.anomaly-card.open .toggle-arrow {
-  transform: rotate(90deg);
-}
-
-.anomaly-content {
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
   display: none;
-  margin-top: 15px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-glow);
+  border-radius: 6px;
+  padding: 10px 14px;
+  box-shadow: 0 0 15px #00000088;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin-top: 5px;
+  z-index: 1;
+  min-width: 200px;
 }
 
-.anomaly-card.open .anomaly-content {
+.account-widget:hover .dropdown {
   display: block;
 }
 
@@ -253,7 +229,7 @@ body::before {
   left: 0;
   width: 100vw;
   height: 100%;
-  background: url('ica.png') repeat-y center;
+  background: url('thisthing.png') repeat-y center;
   background-size: cover;
   opacity: 0.2; /* Adjust visibility */
   z-index: -1;
@@ -261,45 +237,28 @@ body::before {
   mask-image: linear-gradient(to right, black 0%, transparent 25%, transparent 75%, black 100%);
 }
 
-    .clearence h3 {
-      margin-bottom: 10px;
-      color: #4e5864;
-      text-align: left;
-    }
+
 
   </style>
 </head>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const cards = document.querySelectorAll(".anomaly-card");
-
-    cards.forEach(card => {
-      const toggle = card.querySelector(".toggle-wrapper");
-
-      toggle.addEventListener("click", function () {
-        card.classList.toggle("open");
-      });
-    });
-  });
-</script>
-
 <body>
 
 <header>
-  <h1>Facility-03 "Black Dagger" Database</h1>
-  <div class="account-widget">
-    <div class="user-info">
-      <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="User Icon">
-      <span>Local Account</span>
-    </div>
-    <div class="dropdown">
-      <p><strong>Clearance Level:</strong> 3</p>
-      <p><strong>Status:</strong> Logged in anonymously</p>
-      <p><strong>Session ID:</strong> #F03-47329</p>
-      <p><strong>Clearance Key:</strong> level3privatekeynr17234165318794</p>
-    </div>
+<h1>Facility-03 "Black Dagger" Database</h1>
+<div class="account-widget">
+  <div class="user-info">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/user.png" alt="User Icon">
+    <span>Local Account</span>
   </div>
+  <div class="dropdown">
+    <p><strong>Clearance Level:</strong> 3</p>
+    <p><strong>Status:</strong> Logged in anonymously</p>
+    <p><strong>Session ID:</strong> #F03-47329</p>
+    <p><strong>Clearance Key:</strong> level3privatekeynr17234165318794</p>
+  </div>
+</div>
+
+
 </header>
 
 <nav>
@@ -307,330 +266,100 @@ body::before {
   <a href="revamp_anomalies3.html">Anomalies</a>
   <a href="revamp_personnel3.html">Personnel</a>
   <a href="revamp_departments3.html">Departments</a>
-  <a href="revamp_logs3.html">Logs</a>
   <a href="revamp_net3.html">NAAD-Net</a>
   <a href="revamp_other3.html">Other</a>
 </nav>
 
-<!-- SIMILAR, LINK, ENTRY AND NUMBER, LOW CAPS -->
-<!-- YOU MAY FIND, UP TO SEVEN -->
+
+
 
 <div class="container">
-  <h2 class="section-title">Anomaly Files</h2>
-  <p style="margin-bottom: 40px; font-size: 1.1rem; color: #ccc;">
-    Below you'll find all documented anomalies. Canon entries follow the standardized format, while legacy files are retained for archival purposes.
-  </p>
+  <div class="intro">
+    <h2>Welcome to the OFFICIAL Facility-03 "Black Dagger" Database!</h2>
+    <h3>50 articles • 628 total edits • 60 files uploaded</h3>
+    <br> 
+    <p>This Database documents F-03 as a whole and all associated anomalies, lore and personnel.</p>
+    <p>This Database has been identified as requiring proof reading and confirmation that all the data is indeed correct.</p>
+  </div>
 
-  <!-- Canon Entries -->
-  <section>
-    <h2 style="color: var(--text-accent); margin-bottom: 20px;">Current Canon Entries</h2>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-5673</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <iframe src="https://docs.google.com/document/d/1DzjIUtItbRBtsrwVDowiGeXwly7al-euJQfPIJdc2aw/edit?usp=sharing" loading="lazy"></iframe>
-        </div>
-      </div>
+  <h2 class="section-title">Navigation</h2>
+  <div class="card-grid">
+    <div class="card">
+      <a href="revamp_anomalies3.html" target="_blank">
+        <img src="room.png" alt="AN" style="cursor: pointer">
+      </a>
+      <h3>AN Entries</h3>
     </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-233</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <iframe src="https://docs.google.com/document/d/1bgS1ujqJtFvebCXBvxHg6EgCjlhH2K05UrgiduovGGs/edit?usp=sharing" loading="lazy"></iframe>
-        </div>
-      </div>
+    <div class="card">
+      <a href="revamp_personnel3.html" target="_blank">
+      <img src="wick.png" alt="Personnel">
+      </a>
+      <h3>Personnel Files</h3>
     </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-311</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <iframe src="https://docs.google.com/document/d/1TwioNfIbXD1v21IFM9zYsPRWkPIBTfOG4uv4FMxX-bI/edit?usp=sharing" loading="lazy"></iframe>
-        </div>
-      </div>
+    <div class="card">
+      <a href="revamp_net3.html" target="_blank">
+      <img src="ica.png" alt="Departments">
+      </a>
+      <h3>Departments</h3>
     </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-312</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <iframe src="https://docs.google.com/document/d/13WAYe_UWYpr4Bc0qwvBNJrcWfGioXIzYAWzuvDddNXY/edit?usp=sharing" loading="lazy"></iframe>
-        </div>
-      </div>
-    </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-772</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <iframe src="https://docs.google.com/document/d/1C6ExtulHoci_dQtr5hzdmvDQBCNhHP61rzJtMJSgAfA/edit" loading="lazy"></iframe>
-        </div>
-      </div>
-    </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-1025</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <p>No document is available at this time.</p>
-        </div>
-      </div>
-    </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-079</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <p>No document is available at this time.</p>
-        </div>
-      </div>
-    </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-093</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <p>No document is available at this time.</p>
-        </div>
-      </div>
-    </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-2950</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <p>No document is available at this time.</p>
-        </div>
-      </div>
-    </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-316</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <p>No document is available at this time.</p>
-        </div>
-      </div>
-    </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-999</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <p>No document is available at this time.</p>
-        </div>
-      </div>
-    </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-529</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <p>No document is available at this time.</p>
-        </div>
-      </div>
-    </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-322</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <p>No document is available at this time.</p>
-        </div>
-      </div>
-    </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-023</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <p>No document is available at this time.</p>
-        </div>
-      </div>
-    </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-821</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <p>No document is available at this time.</p>
-        </div>
-      </div>
-    </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-049</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <p>No document is available at this time.</p>
-        </div>
-      </div>
-    </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-006</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <p>No document is available at this time.</p>
-        </div>
-      </div>
-    </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-966</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <p>No document is available at this time.</p>
-        </div>
-      </div>
-    </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-457</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <p>No document is available at this time.</p>
-        </div>
-      </div>
-    </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-173</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <p>No document is available at this time.</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Legacy Entries -->
-  <section style="margin-top: 80px;">
-    <h3 style="color: #999; margin-bottom: 20px;">Legacy Entries (Not-Canon)</h3>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-166</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <iframe src="https://docs.google.com/document/d/12VybqqF3xk2DanUEfqWNz_ztWKaKMWZp0GFiPKzV3p4/edit" loading="lazy"></iframe>
-        </div>
-      </div>
+    <div class="card">
+      <a href="revamp_net3.html" target="_blank">
+      <img src="office.png" alt="Net">
+      </a>
+      <h3>NAAD-Net</h3>
     </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-027</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <iframe src="https://docs.google.com/document/d/1d9pePwGj_qnTRgbTVn2Xy4RD10NyVH2eIP4IzNHhoOI/edit?usp=drivesdk" loading="lazy"></iframe>
-        </div>
-      </div>
-    </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>SCP-049</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <iframe src="https://docs.google.com/document/d/1bS1zI0Ol5IKXQCp8vlohgJRv6rT-dxao/edit?usp=sharing&ouid=101609366160739451702&rtpof=true&sd=true" loading="lazy"></iframe>
-        </div>
-      </div>
-    </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-006</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <iframe src="https://docs.google.com/document/d/17w2AvvWGPkdepn8uZ_lYpf1tkRuU5smAquuFNqTtebM/edit?usp=drivesdk" loading="lazy"></iframe>
-        </div>
-      </div>
-    </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-584</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <iframe src="https://docs.google.com/document/d/1hLHrfHHu7S9qTZw-z80II65Pt4fk4MbqNs6yLJyQYKc/edit?usp=sharing" loading="lazy"></iframe>
-        </div>
-      </div>
-    </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-139</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <iframe src="https://docs.google.com/document/d/1Mtl-c6WYKndowz5cANh11dgKrj_AQ2-E_EJ63U2bUfo/edit?usp=sharing" loading="lazy"></iframe>
-        </div>
-      </div>
-    </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-821</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <iframe src="https://docs.google.com/document/d/1nYEpV533yCREmKI-sem4Z95Ti0A-myCx4Cfef6ZElpM/edit?usp=sharing" loading="lazy"></iframe>
-        </div>
-      </div>
-    </div>
-  </section>
+  </div>
+
+  <h2 class="section-title">Featured Article</h2>
+  <div class="card">
+    <h3>AN-4167 - The Yogurt</h3>
+    <p class="redacted">AN-4167 is a 150g banana yogurt container made of plastic with the label.../p>
+    <a class="read-more" href="revamp_anomalies3.html" target="_blank">Read More →</a>
+  </div>
 </div>
 
+<!-- Add inside the <body> tag, before the footer -->
+<div class="container">
+  <h2 class="section-title">Community</h2>
 
 
+  <div class="intro">
+    <h3>Recent News</h3>
+    <ul style="line-height: 1.7; padding-left: 20px;">
+      <li><strong>06-08-2025: </strong>Economy update<br><br>Medbay has been expanded and renamed to Medical Center<br><br>The security wing now includes the reactor, warhead room and ICBM silo<br><br>Added walk-in fridge and workshop in scientific wing<br><br>Added pipes and electrical boxes around the facility for M&S<br><br>Redid TSC Cells, added showers, added vents<br><br>Added restrooms around the facility<br><br>Added more cameras in the CW</li><br><br>
+      <li><strong>02-08-2025: </strong>Guns and guns and guns<br><br>Combative teams are now able to swap their guns out: Rifles: M16A4 ; FN Fal ; AUG A3 ; ACR<br><br>Submachine guns: Kriss Vector ; P90 ; MP5<br><br> Personal Defense Weapons (PDWs):<br><br>APC556 PDW ; AAC Honey Badger<br><br>Shotguns: Spas-12<br><br>For this, they have to be in any armory during the session, then request their gun in ⁠session-requests.<br><br>SCED Squads now can have specialists, those being the Combat Medic, the Marksman and the Support. Each has different guns (ones that can't normally be obtained) and tools.</li><br><br>
+      <li><strong>01-08-2025: </strong>Mini Update<br><br>SRRF removed due to high inactivity<br><br>Added [CCD] Crisis Control Detachment as a detachment of SCED<br><br>CCD will: Help combat threats SCED can't handle on its own (such as raids or mass breaches); Get their own morph; Better gear (Different guns, better vests -> more hp); Not be entered via an application, but skilled SCED members will be picked out</li><br><br>
+      <li><strong>13-07-2025: </strong>Mini Update<br><br>Some small changes and general updates<br><br>Added AN-5673s Containment Cell in Level -2 (as per scientific request)<br><br>Changed all maps inside CW to be "zoomed in" on the CW<br><br>Added all morphs for the M&S Detachments, as well as M&S itself: MNSLR, MNSMR, MNSHR, ETEDLR, ETEDMR, ETEDHR, ACEDLR, ACEDMR, ACEDHR<br><br>Added the rest of NIIS morphs: NIISLR, NIISMR, NIISHR<br><br>Added ICA spawn to their area</li><br><br>
+      <li><strong>08-07-2025: </strong>Mother of All Updates<br><br><strong>Overall</strong><br>Added Facility Maps around the facility<br>Added Cameras<br>Split up the facility into 4 levels<br>Added RAZs (Restricted Access Zones)<br>Added stationary M60s (props) around the facility<br>Revamped SCED & SRRF Morphs<br>Added new department NIIS (NATO Intelligence & Internal Security)<br>Changed soundtrack to only facility ambience, no more music (except for events)<br><br><strong>Lobby</strong><br>OORP Area<br>Facility Map<br>RP Rules<br>Statues of devs and the ownership<br>Area for SSU/SSD Briefing<br>Discord invite link<br>Accessible through the "LOBBY" team in the team menu<strong>Containment Wing</strong><br>Checkpoint DELTA expanded<br>Hallways revamped<br>Added markers on the floor to show the directions<br>Added shelter CHARLIE<br>Revamped SRRF Armory and added zones for Test Subjects to receive guns (in the armory, touch a gun rack)<br>Moved ALL anomalies into CW<br>Split the CW into 3 areas: Biological Wing (Holds 008 and 409), Object Wing (Holds 1025,312,079,093,2950 and 316), Living Wing (Level 1 holds 131, 999, 529, 322, 023, 066, 311, 821 / Level 2 holds 049, 006, 966, 457, 173)<br>Each anomaly cell is specialized to fit it's anomaly (using wikidot)<br>Some of the more "fear-inducing" anomalies have their own soundtracks which underline this feeling<br><br><strong>Scientific Wing</strong><br>Removed all anomaly cells (moved to CW)<br>Added quick-access elevators to TSC and CW<br>Made room for future updates (walk-in fridge, etc lol)<br><br><strong>Center Wing</strong><br>Revamped Star Square<br>Opened the recreational area for future updates<br>Revamped the doors leading in and out<br>Added area for ICA<br><br><strong>Auxiliary Wing</strong><br>Added Transformers Room <strong>Security Wing</strong><br>Revamped hallways<br>Revamped checkpoint ALPHA<br>Added zones for Test Subjects to receive guns (in the armory, touch a gun rack)<br>Added shelter BRAVO<br><br><strong>Administrative Wing</strong><br>Added the office area<br>FED offices<br>SRRF Director office<br>SCED Director office<br>Overall combative rooms (to discuss, etc)<br>HTS Director office<br>R&T Director office<br>Civil department rooms <br>Junior Facility Administrator office<br>Deputy Facility Administrator office<br>Facility Administrator office<br>Added shelter ALPHA<br><br><strong>Intelligence Wing</strong><br>Checkpoint ECHO<br>Interrogation rooms<br>Holding cells<br>Document storage<br>Surveillance room<br>Server room<br>NIIS equipment room<br>Facility Control Room</li>
+    </ul>
+  </div>
+
+  <div class="intro">
+    <h3>Update Log</h3>
+    <ul style="line-height: 1.7; padding-left: 20px;">
+      <li><strong>25-08-2025: </strong>General Updates <br>Changed some things <br>New background <br>Removed Logs tab
+      <br><br>
+      <li><strong>11-07-2025: </strong>Part 2 Update <br>Better visuals <br>Departments tab <br>Authentication system
+      <br><br>
+      <li><strong>08-07-2025: </strong>Grand Launch
+      <br><br>
+      <li><strong>07-07-2025: </strong>Working on final preparations for the launch <br>Minor changes
+      <br><br>
+      <li><strong>06-07-2025: </strong>Started Website Overhaul Development <br>Overhauled the old realistic database system and went back to the first design <br>New and improved graphics and navigation <br>Other interesting details</li>
+    </ul>
+  </div>
+
+  <div class="intro">
+    <h3>Join our Roleplay</h3>
+    <p>Follow and join the Facility-03 community for news, feedback, and collaboration:</p>
+    <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 15px;">
+      <a href="https://discord.gg/kSyrX5cjXM" target="_blank" style="color: var(--text-accent); text-decoration: none;">
+        <img src="https://img.icons8.com/ios-filled/24/6cb4ff/discord-logo.png" alt="Discord" style="vertical-align: middle;"> Discord
+      </a>
+    </div>
+  </div>
+</div>
 
 <div class="footer">
   &copy; 2025 F-03 Database — Contact: @axilonis, @wicketderework
@@ -638,6 +367,4 @@ body::before {
 
 </body>
 </html>
-
-
 
