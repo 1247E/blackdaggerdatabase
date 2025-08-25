@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -253,7 +254,7 @@ body::before {
   left: 0;
   width: 100vw;
   height: 100%;
-  background: url('ica.png') repeat-y center;
+  background: url('thisthing.png') repeat-y center;
   background-size: cover;
   opacity: 0.2; /* Adjust visibility */
   z-index: -1;
@@ -261,10 +262,29 @@ body::before {
   mask-image: linear-gradient(to right, black 0%, transparent 25%, transparent 75%, black 100%);
 }
 
-    .clearence h3 {
-      margin-bottom: 10px;
-      color: #4e5864;
-      text-align: left;
+    .redacted {
+      position: relative;
+      display: inline-block;
+      color: transparent;
+      background-color: rgba(26,26,29,255);
+      overflow: hidden;
+    }
+
+    .redacted::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(black 30%, transparent 30%),
+        radial-gradient(black 30%, transparent 30%);
+      background-size: 4px 4px;
+      background-position: 0 0, 2px 2px;
+      animation: noise 0.3s infinite;
+      opacity: 0.5;
+      pointer-events: none;
     }
 
   </style>
@@ -297,7 +317,7 @@ body::before {
       <p><strong>Clearance Level:</strong> 4</p>
       <p><strong>Status:</strong> Logged in anonymously</p>
       <p><strong>Session ID:</strong> #F03-47329</p>
-      <p><strong>Clearence Key:</strong> level4grandaccesskeynr102</p>
+      <p><strong>Clearance Key:</strong> level4grandaccesskeynr102</p>
     </div>
   </div>
 </header>
@@ -307,7 +327,6 @@ body::before {
   <a href="revamp_anomalies4.html">Anomalies</a>
   <a href="revamp_personnel4.html">Personnel</a>
   <a href="revamp_departments4.html">Departments</a>
-  <a href="revamp_logs4.html">Logs</a>
   <a href="revamp_net4.html">NAAD-Net</a>
   <a href="revamp_other4.html">Other</a>
 </nav>
@@ -321,6 +340,39 @@ body::before {
   <!-- Canon Entries -->
   <section>
     <h2 style="color: var(--text-accent); margin-bottom: 20px;">Current Canon Entries</h2>
+    <div class="anomaly-grid">
+      <div class="anomaly-card">
+        <div class="toggle-wrapper">
+          <h3>AN-4167</h3>
+          <span class="toggle-arrow">▶</span>
+        </div>
+        <div class="anomaly-content">
+          <iframe src="https://docs.google.com/document/d/1trqgbUT5lurjYHTqqDHS0H2B_EAKEsc2PPvxcGXo2a4/edit?tab=t.0" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="anomaly-grid">
+      <div class="anomaly-card">
+        <div class="toggle-wrapper">
+          <h3>AN-031</h3>
+          <span class="toggle-arrow">▶</span>
+        </div>
+        <div class="anomaly-content">
+          <iframe src="https://docs.google.com/document/d/1Bjg0-oaVy5vRCgsS3qcJVSHkkbEqsFzzZYOnLfhrPLs/edit?tab=t.0" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="anomaly-grid">
+      <div class="anomaly-card">
+        <div class="toggle-wrapper">
+          <h3>AN-3222</h3>
+          <span class="toggle-arrow">▶</span>
+        </div>
+        <div class="anomaly-content">
+          <iframe src="https://docs.google.com/document/d/1sN6KFiDnkNeFbS9l80vsmkE2tAPK06UtHHMGP8Le1NA/edit?usp=sharing" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
     <div class="anomaly-grid">
       <div class="anomaly-card">
         <div class="toggle-wrapper">
@@ -482,7 +534,7 @@ body::before {
           <span class="toggle-arrow">▶</span>
         </div>
         <div class="anomaly-content">
-          <p>No document is available at this time.</p>
+          <iframe src="https://docs.google.com/document/d/1nYEpV533yCREmKI-sem4Z95Ti0A-myCx4Cfef6ZElpM/edit?usp=sharing" loading="lazy"></iframe>
         </div>
       </div>
     </div>
@@ -545,7 +597,7 @@ body::before {
 
   <!-- Legacy Entries -->
   <section style="margin-top: 80px;">
-    <h3 style="color: #999; margin-bottom: 20px;">Legacy Entries (Not-Canon)</h3>
+    <h2 style="color: #999; margin-bottom: 20px;">Legacy Entries (Not-Canon)</h2>
     <div class="anomaly-grid">
       <div class="anomaly-card">
         <div class="toggle-wrapper">
@@ -564,7 +616,7 @@ body::before {
           <span class="toggle-arrow">▶</span>
         </div>
         <div class="anomaly-content">
-          <iframe src="https://docs.google.com/document/d/1d9pePwGj_qnTRgbTVn2Xy4RD10NyVH2eIP4IzNHhoOI/edit?usp=drivesdk" loading="lazy"></iframe>
+          <p class="redacted">You do not have the required clearance level to view this content. ----------------------------------------------------------------------------------------------------------------<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
         </div>
       </div>
     </div>
@@ -597,7 +649,7 @@ body::before {
           <span class="toggle-arrow">▶</span>
         </div>
         <div class="anomaly-content">
-          <iframe src="https://docs.google.com/document/d/1hLHrfHHu7S9qTZw-z80II65Pt4fk4MbqNs6yLJyQYKc/edit?usp=sharing" loading="lazy"></iframe>
+          <p class="redacted">You do not have the required clearance level to view this content. ----------------------------------------------------------------------------------------------------------------<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
         </div>
       </div>
     </div>
@@ -609,17 +661,6 @@ body::before {
         </div>
         <div class="anomaly-content">
           <iframe src="https://docs.google.com/document/d/1Mtl-c6WYKndowz5cANh11dgKrj_AQ2-E_EJ63U2bUfo/edit?usp=sharing" loading="lazy"></iframe>
-        </div>
-      </div>
-    </div>
-    <div class="anomaly-grid">
-      <div class="anomaly-card">
-        <div class="toggle-wrapper">
-          <h3>AN-821</h3>
-          <span class="toggle-arrow">▶</span>
-        </div>
-        <div class="anomaly-content">
-          <iframe src="https://docs.google.com/document/d/1nYEpV533yCREmKI-sem4Z95Ti0A-myCx4Cfef6ZElpM/edit?usp=sharing" loading="lazy"></iframe>
         </div>
       </div>
     </div>
@@ -635,3 +676,4 @@ body::before {
 
 </body>
 </html>
+
