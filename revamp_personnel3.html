@@ -267,6 +267,48 @@ body::before {
       text-align: left;
     }
 
+    .redacted {
+      position: relative;
+      display: inline-block;
+      color: transparent;
+      background-color: rgba(26,26,29,255);
+      overflow: hidden;
+    }
+
+    .redacted::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(black 30%, transparent 30%),
+        radial-gradient(black 30%, transparent 30%);
+      background-size: 4px 4px;
+      background-position: 0 0, 2px 2px;
+      animation: noise 0.3s infinite;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    @keyframes noise {
+      0% {
+        background-position: 0 0, 2px 2px;
+      }
+      25% {
+        background-position: 1px 1px, 3px 3px;
+      }
+      50% {
+        background-position: -1px -1px, 1px 2px;
+      }
+      75% {
+        background-position: 2px -2px, 0px 1px;
+      }
+      100% {
+        background-position: 0 0, 2px 2px;
+      }
+    }
 
 
   </style>
@@ -602,6 +644,7 @@ body::before {
 
 </body>
 </html>
+
 
 
 
